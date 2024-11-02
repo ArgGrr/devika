@@ -13,7 +13,9 @@ services:
       start_period: 30s
     volumes:
       - /mnt/app_config/devika/db:/home/nonroot/devika/db
-      - /mnt/app_config/devika/config.toml:/home/nonroot/devika/config.toml
+      - type: bind
+        source: /mnt/app_config/devika/config.toml
+        target: /home/nonroot/devika/config.toml
     networks:
       - devika-subnetwork
 
