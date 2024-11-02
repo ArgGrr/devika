@@ -9,6 +9,8 @@ services:
       timeout: 30s
       retries: 5
       start_period: 30s
+    ports:
+      - 14337:1337      
     volumes:
       - /mnt/app_config/devika/db:/home/nonroot/devika/db
       - /mnt/app_config/devika/config.toml:/home/nonroot/devika/config.toml
