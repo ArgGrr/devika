@@ -3,10 +3,8 @@ services:
     build:
       context: .
       dockerfile: devika.dockerfile
-    ports:
-      - 14337:1337
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:14337/ || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://devika-backend-engine:1337/ || exit 1"]
       interval: 5s
       timeout: 30s
       retries: 5
@@ -22,7 +20,7 @@ services:
       context: .
       dockerfile: app.dockerfile
       args:
-        - VITE_API_BASE_URL=http://127.0.0.1:14337
+        - VITE_API_BASE_URL=http://devika-backend-engine:1337
     depends_on:
       - devika-backend-engine
     ports:
