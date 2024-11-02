@@ -1,15 +1,10 @@
-version: "3.9"
-
 services:
-
   devika-backend-engine:
     build:
       context: .
       dockerfile: devika.dockerfile
     ports:
       - 14337:1337
-    environment:
-      - OLLAMA_HOST=${OLLAMA_URL}
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:14337/ || exit 1"]
       interval: 5s
@@ -17,7 +12,8 @@ services:
       retries: 5
       start_period: 30s
     volumes:
-      - devika-backend-dbstore:/home/nonroot/devika/db
+      - /mnt/app_config/devika/db:/home/nonroot/devika/db
+      - /mnt/app_config/devika/config.toml:/home/nonroot/devika/config.toml
     networks:
       - devika-subnetwork
 
@@ -36,6 +32,3 @@ services:
 
 networks:
   devika-subnetwork:
-
-volumes:
-  devika-backend-dbstore:
